@@ -19,6 +19,7 @@ jobs:
   snapshot:
     if: ${{ !contains(github.event.commits[0].message, 'nosnapshot') }}
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     name: Snapshot
     permissions:
       contents: read
@@ -82,6 +83,7 @@ jobs:
   publish:
     if: ${{ !inputs.snapshot_only && !contains(github.event.head_commit.message, '[snapshot-only]') }}
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     name: Publish
     permissions:
       contents: write

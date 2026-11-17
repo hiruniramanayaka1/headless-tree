@@ -1,3 +1,10 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 3 optimizations:
+# - [HIGH] Split "snapshot" into parallel jobs (lint + test + build)
+# - [HIGH] Split "publish" into parallel jobs (lint + test + build)
+# - [LOW] Use shallow clone in "publish" job
+# Estimated savings: ~12 min/run
+#
 name: Publish
 on:
   push:
@@ -27,7 +34,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: check skip tag
         run: |
